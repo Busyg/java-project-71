@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+    id 'jacoco'
 }
 
 group = 'org.example'
@@ -22,6 +24,11 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
 }
 
 application {
