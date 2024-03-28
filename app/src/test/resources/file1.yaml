@@ -1,0 +1,8 @@
+products:
+name: Product A
+characteristics:
+type: T-shirt
+material: Cotton
+available_sizes:
+size: S
+price: 100

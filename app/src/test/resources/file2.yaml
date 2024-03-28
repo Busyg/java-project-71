@@ -1,0 +1,8 @@
+products:
+name: Product A
+characteristics:
+type: Jeans
+material: Denim
+available_sizes:
+size: 28
+price: 120
