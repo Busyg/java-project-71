@@ -11,15 +11,15 @@ public class PlainFormatter {
                 switch (entry.getKey()) {
                     case "changed":
                         resultString += "\nProperty '" + key.getKey() + "' was updated. ";
-                        resultString += "From " + getPlainData(entry.getValue()[0]);
-                        resultString += " to " + getPlainData(entry.getValue()[1]);
+                        resultString += "From " + getPlainData(entry.getValue()[0], "changed");
+                        resultString += " to " + getPlainData(entry.getValue()[1], "changed");
                         break;
                     case "removed":
                         resultString += "\nProperty '" + key.getKey() + "' was removed";
                         break;
                     case "added":
                         resultString += "\nProperty '" + key.getKey() + "' was added ";
-                        resultString += "with value: " + getPlainData(entry.getValue()[0]);
+                        resultString += "with value: " + getPlainData(entry.getValue()[0], "added");
                         break;
                     default:
                         break;
@@ -29,13 +29,13 @@ public class PlainFormatter {
         return resultString.trim();
     }
 
-    public static String getPlainData(Object data) {
+    public static String getPlainData(Object data, String entryStatus) {
         if (data == null) {
             return "null";
         } else if (data instanceof ArrayList<?> || data instanceof Map<?, ?>) {
             return "[complex value]";
         } else {
-            return data.toString();
+            return entryStatus.equals("added") ? "'" + data.toString() + "'" : data.toString();
         }
     }
 }
