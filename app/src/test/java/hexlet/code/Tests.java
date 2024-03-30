@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import static hexlet.code.Differ.generate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -73,19 +74,19 @@ public class Tests {
 
     @Test
     public void plainJSONFilesTest() throws IOException {
-        var expected = "Property 'chars2' was updated. From [d, e, f] to false\n"
+        var expected = "Property 'chars2' was updated. From [complex value] to false\n"
                 + "Property 'checked' was updated. From false to true\n"
-                + "Property 'default' was updated. From null to [value1, value2]\n"
+                + "Property 'default' was updated. From null to [complex value]\n"
                 + "Property 'id' was updated. From 45 to null\n"
                 + "Property 'key1' was removed.\n"
                 + "Property 'key2' was added with value: value2\n"
-                + "Property 'numbers2' was updated. From [2, 3, 4, 5] to [22, 33, 44, 55]\n"
+                + "Property 'numbers2' was updated. From [complex value] to [complex value]\n"
                 + "Property 'numbers3' was removed.\n"
-                + "Property 'numbers4' was added with value: [4, 5, 6]\n"
+                + "Property 'numbers4' was added with value: [complex value]\n"
                 + "Property 'obj1' was added with value: [complex value]\n"
                 + "Property 'setting1' was updated. From Some value to Another value\n"
                 + "Property 'setting2' was updated. From 200 to 300\n"
-                + "Property 'setting3' was updated. From true to none\n";
+                + "Property 'setting3' was updated. From true to none";
         assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.json",
                 "src/test/resources/file2.json", "plain"));
     }
@@ -164,19 +165,19 @@ public class Tests {
 
     @Test
     public void plainYAMLFilesTest() throws IOException {
-        var expected = "Property 'chars2' was updated. From [d, e, f] to false\n"
+        var expected = "Property 'chars2' was updated. From [complex value] to false\n"
                 + "Property 'checked' was updated. From false to true\n"
-                + "Property 'default' was updated. From null to [value1, value2]\n"
+                + "Property 'default' was updated. From null to [complex value]\n"
                 + "Property 'id' was updated. From 45 to null\n"
                 + "Property 'key1' was removed.\n"
                 + "Property 'key2' was added with value: value2\n"
-                + "Property 'numbers2' was updated. From [2, 3, 4, 5] to [22, 33, 44, 55]\n"
+                + "Property 'numbers2' was updated. From [complex value] to [complex value]\n"
                 + "Property 'numbers3' was removed.\n"
-                + "Property 'numbers4' was added with value: [4, 5, 6]\n"
+                + "Property 'numbers4' was added with value: [complex value]\n"
                 + "Property 'obj1' was added with value: [complex value]\n"
                 + "Property 'setting1' was updated. From Some value to Another value\n"
                 + "Property 'setting2' was updated. From 200 to 300\n"
-                + "Property 'setting3' was updated. From true to none\n";
+                + "Property 'setting3' was updated. From true to none";
         assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yaml",
                 "src/test/resources/file2.yaml", "plain"));
     }
@@ -195,11 +196,10 @@ public class Tests {
     }
 
     @Test
-    public void differentFiletypesTest() throws RuntimeException {
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yaml",
-                    "src/test/resources/file2.json", "stylish");
-        });
-        assertEquals("Files format mismatch", exception.getMessage());
+    public void differentFiletypesTest() throws IOException {
+        System.setOut(new PrintStream(outputStreamCaptor));
+        generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yaml",
+                "src/test/resources/file2.json", "plain");
+        assertEquals("Files format mismatch", outputStreamCaptor.toString().trim());
     }
 }

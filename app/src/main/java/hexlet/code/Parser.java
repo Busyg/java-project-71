@@ -21,7 +21,8 @@ public class Parser {
         } else if (firstPath.toString().endsWith("yaml") && secondPath.toString().endsWith("yaml")) {
             objectMapper = new YAMLMapper();
         } else {
-            throw new RuntimeException("Files format mismatch");
+            System.out.println("Files format mismatch");
+            return new TreeMap<>();
         }
         String firstFile = Files.readString(firstPath);
         String secondFile = Files.readString(secondPath);
