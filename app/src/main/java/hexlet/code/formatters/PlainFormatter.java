@@ -15,7 +15,7 @@ public class PlainFormatter {
                         resultString += " to " + getPlainData(entry.getValue()[1]);
                         break;
                     case "removed":
-                        resultString += "\nProperty '" + key.getKey() + "' was removed.";
+                        resultString += "\nProperty '" + key.getKey() + "' was removed";
                         break;
                     case "added":
                         resultString += "\nProperty '" + key.getKey() + "' was added ";
