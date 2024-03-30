@@ -18,7 +18,7 @@ public class Parser {
         ObjectMapper objectMapper = new ObjectMapper();
         if (firstPath.toString().endsWith("json") && secondPath.toString().endsWith("json")) {
             objectMapper = new JsonMapper();
-        } else if (firstPath.toString().endsWith("yaml") && secondPath.toString().endsWith("yaml")) {
+        } else if (firstPath.toString().endsWith("yml") && secondPath.toString().endsWith("yml")) {
             objectMapper = new YAMLMapper();
         } else {
             System.out.println("Files format mismatch");

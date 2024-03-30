@@ -26,7 +26,7 @@ public class PlainFormatter {
                 }
             }
         }
-        return resultString;
+        return resultString.trim();
     }
 
     public static String getPlainData(Object data) {
