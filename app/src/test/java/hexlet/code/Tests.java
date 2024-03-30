@@ -40,7 +40,7 @@ public class Tests {
                 + "  - setting3: true\n"
                 + "  + setting3: none\n"
                 + "}";
-        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.json",
+        assertEquals(expected, generate("src/test/resources/file1.json",
                 "src/test/resources/file2.json", "stylish"));
     }
 
@@ -60,14 +60,14 @@ public class Tests {
                 + "    setting2: 200\n"
                 + "    setting3: true\n"
                 + "}";
-        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.json",
+        assertEquals(expected, generate("src/test/resources/file1.json",
                 "src/test/resources/file1.json", "stylish"));
     }
 
     @Test
     public void noJSONFileTest() throws IOException {
         assertThrows(IOException.class, () -> {
-            generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.json",
+            generate("src/test/resources/file1.json",
                     "src/test/resources/noFile.json", "stylish");
         });
     }
@@ -87,7 +87,7 @@ public class Tests {
                 + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
                 + "Property 'setting2' was updated. From 200 to 300\n"
                 + "Property 'setting3' was updated. From true to 'none'";
-        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.json",
+        assertEquals(expected, generate("src/test/resources/file1.json",
                 "src/test/resources/file2.json", "plain"));
     }
 
@@ -100,7 +100,7 @@ public class Tests {
                 + "[\"null\",\"[value1, value2]\"],\"id\":[\"45\",\"null\"],\"numbers2\":[\"[2, 3, 4, 5]\","
                 + "\"[22, 33, 44, 55]\"],\"setting1\":[\"Some value\",\"Another value\"],"
                 + "\"setting2\":[\"200\",\"300\"],\"setting3\":[\"true\",\"none\"]}}";
-        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.json",
+        assertEquals(expected, generate("src/test/resources/file1.json",
                 "src/test/resources/file2.json", "json"));
     }
 
@@ -131,7 +131,7 @@ public class Tests {
                 + "  - setting3: true\n"
                 + "  + setting3: none\n"
                 + "}";
-        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yml",
+        assertEquals(expected, generate("src/test/resources/file1.yml",
                 "src/test/resources/file2.yml", "stylish"));
     }
 
@@ -151,14 +151,14 @@ public class Tests {
                 + "    setting2: 200\n"
                 + "    setting3: true\n"
                 + "}";
-        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yml",
+        assertEquals(expected, generate("src/test/resources/file1.yml",
                 "src/test/resources/file1.yml", "stylish"));
     }
 
     @Test
     public void noYAMLFileTest() throws IOException {
         assertThrows(IOException.class, () -> {
-            generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yml",
+            generate("src/test/resources/file1.yml",
                     "src/test/resources/noFile.yml", "stylish");
         });
     }
@@ -178,7 +178,7 @@ public class Tests {
                 + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
                 + "Property 'setting2' was updated. From 200 to 300\n"
                 + "Property 'setting3' was updated. From true to 'none'";
-        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yml",
+        assertEquals(expected, generate("src/test/resources/file1.yml",
                 "src/test/resources/file2.yml", "plain"));
     }
 
@@ -191,14 +191,14 @@ public class Tests {
                 + "[\"null\",\"[value1, value2]\"],\"id\":[\"45\",\"null\"],\"numbers2\":[\"[2, 3, 4, 5]\","
                 + "\"[22, 33, 44, 55]\"],\"setting1\":[\"Some value\",\"Another value\"],"
                 + "\"setting2\":[\"200\",\"300\"],\"setting3\":[\"true\",\"none\"]}}";
-        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yml",
+        assertEquals(expected, generate("src/test/resources/file1.yml",
                 "src/test/resources/file2.yml", "json"));
     }
 
     @Test
     public void differentFiletypesTest() throws IOException {
         System.setOut(new PrintStream(outputStreamCaptor));
-        generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yml",
+        generate("src/test/resources/file1.yml",
                 "src/test/resources/file2.json", "plain");
         assertEquals("Files format mismatch", outputStreamCaptor.toString().trim());
     }
