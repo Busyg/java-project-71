@@ -72,6 +72,25 @@ public class Tests {
     }
 
     @Test
+    public void plainJSONFilesTest() throws IOException {
+        var expected = "Property 'chars2' was updated. From [d, e, f] to false\n"
+                + "Property 'checked' was updated. From false to true\n"
+                + "Property 'default' was updated. From null to [value1, value2]\n"
+                + "Property 'id' was updated. From 45 to null\n"
+                + "Property 'key1' was removed.\n"
+                + "Property 'key2' was added with value: value2\n"
+                + "Property 'numbers2' was updated. From [2, 3, 4, 5] to [22, 33, 44, 55]\n"
+                + "Property 'numbers3' was removed.\n"
+                + "Property 'numbers4' was added with value: [4, 5, 6]\n"
+                + "Property 'obj1' was added with value: [complex value]\n"
+                + "Property 'setting1' was updated. From Some value to Another value\n"
+                + "Property 'setting2' was updated. From 200 to 300\n"
+                + "Property 'setting3' was updated. From true to none\n";
+        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.json",
+                "src/test/resources/file2.json", "plain"));
+    }
+
+    @Test
     public void differentYAMLFilesTest() throws IOException {
         var expected = "{\n"
                 + "    chars1: [a, b, c]\n"
@@ -128,6 +147,25 @@ public class Tests {
             generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yaml",
                     "src/test/resources/noFile.yaml", "stylish");
         });
+    }
+
+    @Test
+    public void plainYAMLFilesTest() throws IOException {
+        var expected = "Property 'chars2' was updated. From [d, e, f] to false\n"
+                + "Property 'checked' was updated. From false to true\n"
+                + "Property 'default' was updated. From null to [value1, value2]\n"
+                + "Property 'id' was updated. From 45 to null\n"
+                + "Property 'key1' was removed.\n"
+                + "Property 'key2' was added with value: value2\n"
+                + "Property 'numbers2' was updated. From [2, 3, 4, 5] to [22, 33, 44, 55]\n"
+                + "Property 'numbers3' was removed.\n"
+                + "Property 'numbers4' was added with value: [4, 5, 6]\n"
+                + "Property 'obj1' was added with value: [complex value]\n"
+                + "Property 'setting1' was updated. From Some value to Another value\n"
+                + "Property 'setting2' was updated. From 200 to 300\n"
+                + "Property 'setting3' was updated. From true to none\n";
+        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yaml",
+                "src/test/resources/file2.yaml", "plain"));
     }
 
     @Test
