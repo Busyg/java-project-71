@@ -91,6 +91,19 @@ public class Tests {
     }
 
     @Test
+    public void jsonJSONFilesTest() throws IOException {
+        var expected = "{\"removed\":{\"key1\":\"value1\",\"numbers3\":[3,4,5]},\"added\":{\"key2\":\"value2\","
+                + "\"numbers4\":[4,5,6],\"obj1\":{\"nestedKey\":\"value\",\"isNested\":true}},"
+                + "\"notChanged\":{\"chars1\":[\"a\",\"b\",\"c\"],\"numbers1\":[1,2,3,4]},"
+                + "\"changed\":{\"chars2\":[\"[d, e, f]\",\"false\"],\"checked\":[\"false\",\"true\"],\"default\":"
+                + "[\"null\",\"[value1, value2]\"],\"id\":[\"45\",\"null\"],\"numbers2\":[\"[2, 3, 4, 5]\","
+                + "\"[22, 33, 44, 55]\"],\"setting1\":[\"Some value\",\"Another value\"],"
+                + "\"setting2\":[\"200\",\"300\"],\"setting3\":[\"true\",\"none\"]}}";
+        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.json",
+                "src/test/resources/file2.json", "json"));
+    }
+
+    @Test
     public void differentYAMLFilesTest() throws IOException {
         var expected = "{\n"
                 + "    chars1: [a, b, c]\n"
@@ -166,6 +179,19 @@ public class Tests {
                 + "Property 'setting3' was updated. From true to none\n";
         assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yaml",
                 "src/test/resources/file2.yaml", "plain"));
+    }
+
+    @Test
+    public void jsonYAMLFilesTest() throws IOException {
+        var expected = "{\"removed\":{\"key1\":\"value1\",\"numbers3\":[3,4,5]},\"added\":{\"key2\":\"value2\","
+                + "\"numbers4\":[4,5,6],\"obj1\":{\"nestedKey\":\"value\",\"isNested\":true}},"
+                + "\"notChanged\":{\"chars1\":[\"a\",\"b\",\"c\"],\"numbers1\":[1,2,3,4]},"
+                + "\"changed\":{\"chars2\":[\"[d, e, f]\",\"false\"],\"checked\":[\"false\",\"true\"],\"default\":"
+                + "[\"null\",\"[value1, value2]\"],\"id\":[\"45\",\"null\"],\"numbers2\":[\"[2, 3, 4, 5]\","
+                + "\"[22, 33, 44, 55]\"],\"setting1\":[\"Some value\",\"Another value\"],"
+                + "\"setting2\":[\"200\",\"300\"],\"setting3\":[\"true\",\"none\"]}}";
+        assertEquals(expected, generate("F:/Git Repos/java-project-71/app/src/test/resources/file1.yaml",
+                "src/test/resources/file2.yaml", "json"));
     }
 
     @Test
