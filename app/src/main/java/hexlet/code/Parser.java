@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -14,20 +12,11 @@ import java.util.TreeSet;
 
 public class Parser {
 
-    public static Map<Object, Map<String, Object[]>> parse(Path firstPath, Path secondPath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        if (firstPath.toString().endsWith("json") && secondPath.toString().endsWith("json")) {
-            objectMapper = new JsonMapper();
-        } else if (firstPath.toString().endsWith("yml") && secondPath.toString().endsWith("yml")) {
-            objectMapper = new YAMLMapper();
-        } else {
-            System.out.println("Files format mismatch");
-            return new TreeMap<>();
-        }
-        String firstFile = Files.readString(firstPath);
-        String secondFile = Files.readString(secondPath);
-        var firstMap = objectMapper.readValue(firstFile, Map.class);
-        var secondMap = objectMapper.readValue(secondFile, Map.class);
+    public static Map<Object, Map<String, Object[]>> parse(String firstString, String secondString, String fileFormat)
+            throws IOException {
+        ObjectMapper objectMapper = fileFormat.equals("json") ? new JsonMapper() : new YAMLMapper();
+        var firstMap = objectMapper.readValue(firstString, Map.class);
+        var secondMap = objectMapper.readValue(secondString, Map.class);
         var mapSet = new TreeSet<>();
         Map<Object, Map<String, Object[]>> result = new TreeMap<>();
 
