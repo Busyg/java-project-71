@@ -1,9 +1,9 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,10 +12,9 @@ import static hexlet.code.Differ.generate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Tests {
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private static String expectedStylish = null;
-    private static String expectedPlain = null;
-    private static String expectedJson = null;
+    private static String expectedStylish;
+    private static String expectedPlain;
+    private static String expectedJson;
 
     @BeforeAll
     public static void init() throws IOException {
@@ -24,51 +23,31 @@ public class Tests {
         expectedJson = Files.readString(Path.of("src/test/resources/expectedJson.json"));
     }
 
-    @Test
-    public void defaultJsonTest() throws IOException {
-        assertEquals(expectedStylish, generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json"));
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void defaultTest(String format) throws IOException {
+        assertEquals(expectedStylish, generate("src/test/resources/file1." + format,
+                "src/test/resources/file2." + format));
     }
 
-    @Test
-    public void stylishJsonTest() throws IOException {
-        assertEquals(expectedStylish, generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json", "stylish"));
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void stylishTest(String format) throws IOException {
+        assertEquals(expectedStylish, generate("src/test/resources/file1." + format,
+                "src/test/resources/file2." + format, "stylish"));
     }
 
-    @Test
-    public void plainJsonTest() throws IOException {
-        assertEquals(expectedPlain, generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json", "plain"));
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void plainTest(String format) throws IOException {
+        assertEquals(expectedPlain, generate("src/test/resources/file1." + format,
+                "src/test/resources/file2." + format, "plain"));
     }
 
-    @Test
-    public void jsonJsonTest() throws IOException {
-        assertEquals(expectedJson, generate("src/test/resources/file1.json",
-                "src/test/resources/file2.json", "json"));
-    }
-
-    @Test
-    public void defaultYamlTest() throws IOException {
-        assertEquals(expectedStylish, generate("src/test/resources/file1.yml",
-                "src/test/resources/file2.yml"));
-    }
-
-    @Test
-    public void stylishYamlTest() throws IOException {
-        assertEquals(expectedStylish, generate("src/test/resources/file1.yml",
-                "src/test/resources/file2.yml", "stylish"));
-    }
-
-    @Test
-    public void plainYamlTest() throws IOException {
-        assertEquals(expectedPlain, generate("src/test/resources/file1.yml",
-                "src/test/resources/file2.yml", "plain"));
-    }
-
-    @Test
-    public void jsonYamlTest() throws IOException {
-        assertEquals(expectedJson, generate("src/test/resources/file1.yml",
-                "src/test/resources/file2.yml", "json"));
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void jsonTest(String format) throws IOException {
+        assertEquals(expectedJson, generate("src/test/resources/file1." + format,
+                "src/test/resources/file2." + format, "json"));
     }
 }
