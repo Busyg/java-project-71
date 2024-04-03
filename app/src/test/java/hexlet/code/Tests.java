@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import static hexlet.code.Differ.generate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Tests {
+public final class Tests {
     private static String expectedStylish;
     private static String expectedPlain;
     private static String expectedJson;
