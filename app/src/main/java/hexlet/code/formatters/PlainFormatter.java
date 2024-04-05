@@ -44,7 +44,7 @@ public class PlainFormatter {
         } else if (data instanceof ArrayList<?> || data instanceof Map<?, ?>) {
             return "[complex value]";
         } else if (data instanceof String) {
-            return "'" + data.toString() + "'";
+            return "'" + data + "'";
         } else {
             return data.toString();
         }
