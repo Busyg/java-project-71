@@ -11,7 +11,11 @@ public class Parser {
 
     public static Map<String, Object[]> parse(String fileString, String fileFormat)
             throws IOException {
-        ObjectMapper objectMapper = fileFormat.equals("json") ? new JsonMapper() : new YAMLMapper();
+        ObjectMapper objectMapper = switch (fileFormat) {
+            case "json" -> new JsonMapper();
+            case "yml" -> new YAMLMapper();
+            default -> new ObjectMapper();
+        };
         return objectMapper.readValue(fileString, Map.class);
     }
 }

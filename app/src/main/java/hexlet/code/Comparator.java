@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeSet;
 
-public class Mapper {
-    public static List<Map<String, Object>> map(Map<String, Object[]> firstMap, Map<String, Object[]> secondMap) {
+public class Comparator {
+    public static List<Map<String, Object>> compare(Map<String, Object[]> firstMap, Map<String, Object[]> secondMap) {
         var mapSet = new TreeSet<>();
         List<Map<String, Object>> parsedMapList = new ArrayList<>();
 

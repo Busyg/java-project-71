@@ -5,46 +5,32 @@ import java.util.Map;
 
 public class StylishFormatter {
 
-    private static final int NOCHANGE_TABULATION = 4;
-    private static final int CHANGED_TABULATION = 2;
+    private static final String NO_CHANGE_FORMAT = "    %s: %s\n";
+    private static final String REMOVED_FORMAT = "  - %s: %s\n";
+    private static final String ADDED_FORMAT = "  + %s: %s\n";
 
-    public static String stylishFormatter(List<Map<String, Object>> parsedMapList) {
-        var resultString = "{\n";
+    public static String format(List<Map<String, Object>> parsedMapList) {
+        var resultString = new StringBuilder("{\n");
         for (var element : parsedMapList) {
             switch (element.get("status").toString()) {
                 case "noChange":
-                    resultString += " ".repeat(NOCHANGE_TABULATION) + element.get("key");
-                    resultString += ": ";
-                    resultString += element.get("oldValue");
-                    resultString += "\n";
+                    resultString.append(String.format(NO_CHANGE_FORMAT, element.get("key"), element.get("oldValue")));
                     break;
                 case "changed":
-                    resultString += " ".repeat(CHANGED_TABULATION) + "- " + element.get("key");
-                    resultString += ": ";
-                    resultString += element.get("oldValue");
-                    resultString += "\n";
-                    resultString += " ".repeat(CHANGED_TABULATION) + "+ " + element.get("key");
-                    resultString += ": ";
-                    resultString += element.get("newValue");
-                    resultString += "\n";
+                    resultString.append(String.format(REMOVED_FORMAT, element.get("key"), element.get("oldValue")))
+                            .append(String.format(ADDED_FORMAT, element.get("key"), element.get("newValue")));
                     break;
                 case "removed":
-                    resultString += " ".repeat(CHANGED_TABULATION) + "- " + element.get("key");
-                    resultString += ": ";
-                    resultString += element.get("oldValue");
-                    resultString += "\n";
+                    resultString.append(String.format(REMOVED_FORMAT, element.get("key"), element.get("oldValue")));
                     break;
                 case "added":
-                    resultString += " ".repeat(CHANGED_TABULATION) + "+ " + element.get("key");
-                    resultString += ": ";
-                    resultString += element.get("newValue");
-                    resultString += "\n";
+                    resultString.append(String.format(ADDED_FORMAT, element.get("key"), element.get("newValue")));
                     break;
                 default:
                     break;
             }
         }
-        resultString += "}";
-        return resultString;
+        resultString.append("}");
+        return resultString.toString();
     }
 }

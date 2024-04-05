@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonFormatter {
-    public static String jsonFormatter(List<Map<String, Object>> parsedMapList)
+    public static String format(List<Map<String, Object>> parsedMapList)
             throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(parsedMapList);

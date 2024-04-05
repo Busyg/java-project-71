@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PlainFormatter {
-    public static String plainFormatter(List<Map<String, Object>> parsedMapList) {
+    public static String format(List<Map<String, Object>> parsedMapList) {
         var resultString = "";
         for (var element : parsedMapList) {
             switch (element.get("status").toString()) {

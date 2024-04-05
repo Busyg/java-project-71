@@ -1,32 +1,22 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import hexlet.code.formatters.JsonFormatter;
+import hexlet.code.formatters.PlainFormatter;
+import hexlet.code.formatters.StylishFormatter;
 
 import java.util.List;
 import java.util.Map;
 
-import static hexlet.code.formatters.JsonFormatter.jsonFormatter;
-import static hexlet.code.formatters.PlainFormatter.plainFormatter;
-import static hexlet.code.formatters.StylishFormatter.stylishFormatter;
-
 public class Formatter {
     public static String format(List<Map<String, Object>> parsedMapList, String format)
             throws JsonProcessingException {
-        var resultString = "";
-        switch (format) {
-            case "json":
-                resultString = jsonFormatter(parsedMapList);
-                break;
-            case "plain":
-                resultString = plainFormatter(parsedMapList);
-                break;
-            case "stylish":
-                resultString = stylishFormatter(parsedMapList);
-                break;
-            default:
-                throw new RuntimeException("Unsupported format: " + format);
-        }
-        return resultString;
+        return switch (format) {
+            case "json" -> JsonFormatter.format(parsedMapList);
+            case "plain" -> PlainFormatter.format(parsedMapList);
+            case "stylish" -> StylishFormatter.format(parsedMapList);
+            default -> throw new RuntimeException("Unsupported format: " + format);
+        };
     }
 
 

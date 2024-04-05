@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static hexlet.code.Mapper.map;
+import static hexlet.code.Comparator.compare;
 import static hexlet.code.Parser.parse;
 
 public class Differ {
@@ -14,7 +14,7 @@ public class Differ {
         Path secondPath = Paths.get(filePath2).toAbsolutePath();
         var firstParsedMap = parse(readFile(firstPath), checkFileFormat(firstPath));
         var secondParsedMap = parse(readFile(secondPath), checkFileFormat(secondPath));
-        var finalMap = map(firstParsedMap, secondParsedMap);
+        var finalMap = compare(firstParsedMap, secondParsedMap);
         return Formatter.format(finalMap, format);
     }
 
@@ -27,6 +27,7 @@ public class Differ {
     }
 
     public static String checkFileFormat(Path filePath) {
-        return filePath.toString().endsWith("json") ? "json" : "yml";
+        var pathString = filePath.toString();
+        return pathString.substring(pathString.lastIndexOf(".") + 1);
     }
 }
