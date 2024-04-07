@@ -14,7 +14,7 @@ public class Parser {
         ObjectMapper objectMapper = switch (fileFormat) {
             case "json" -> new JsonMapper();
             case "yml" -> new YAMLMapper();
-            default -> new ObjectMapper();
+            default -> throw new RuntimeException("Неподдерживаемый формат: " + fileFormat);
         };
         return objectMapper.readValue(fileString, Map.class);
     }
